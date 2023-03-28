@@ -18,6 +18,7 @@
     },
     computed:{
       isActive(){
+        //path不加'/'的情况
         return this.$route.path.indexOf(this.path) !== -1
       },
       activeStyle() {
@@ -26,9 +27,6 @@
     },
     methods:{
       itemClick(){
-        // console.log('path:'+this.path);
-        // console.log(this.$router);
-        // console.log(this.$route);
         this.$router.replace(this.path);
       }
     },
