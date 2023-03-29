@@ -1,6 +1,6 @@
 <template>
   <div>
-    <tab-bar>
+    <tab-bar id="tab-bar">
       <tab-bar-item path="/home">
         <img slot="item-icon" src="~assets/img/tabbar/home.svg" alt="">
         <img slot="item-icon-active" src="~assets/img/tabbar/home_active.svg" alt="">
@@ -39,5 +39,8 @@ export default {
 }
 </script>
 
-<style scoped> 
+<style scoped>
+#tab-bar{
+  z-index: 9;
+} 
 </style>
