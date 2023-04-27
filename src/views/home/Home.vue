@@ -120,8 +120,10 @@ export default {
     getHomeGoods(type) {
       const page = this.goods[type].page + 1;
       getHomeGoods(type, page).then(res => {
-        this.goods[type].list.push(...res.data.list);
-        this.goods[type].page += 1
+        if(res!=undefined){
+          this.goods[type].list.push(...res.data.list);
+        }
+        this.goods[type].page += 1;
         // 上拉加载更多
         this.$refs.scroll.finishPullUp();
       })
