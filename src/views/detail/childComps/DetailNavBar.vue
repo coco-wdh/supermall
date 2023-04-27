@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import NavBar from 'components/common/navbar/NavBar'
+import NavBar from '@/components/common/navbar/NavBar.vue'
 
 export default {
   name: "DetailNavBar",
@@ -41,8 +41,7 @@ export default {
 }
 .title{
   display: flex;
-  justify-content: center;
-  gap: 10%;
+  justify-content: space-around;
 }
 .active{
   color: var(--color-high-text);

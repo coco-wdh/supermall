@@ -18,18 +18,18 @@
 
 <script>
 
-import NavBar from 'components/common/navbar/NavBar.vue'
-import TabControl from 'components/content/tabControl/TabControl.vue'
-import GoodList from 'components/content/goods/GoodsList.vue'
-import Scroll from 'components/common/scroll/Scroll.vue'
-import BackTop from 'components/content/backTop/BackTop.vue'
+import NavBar from '@/components/common/navbar/NavBar.vue'
+import TabControl from '@/components/content/tabControl/TabControl.vue'
+import GoodList from '@/components/content/goods/GoodsList.vue'
+import Scroll from '@/components/common/scroll/Scroll.vue'
+import BackTop from '@/components/content/backTop/BackTop.vue'
 
 import HomeSwiper from './homeComps/HomeSwiper.vue'
 import RecommendView from './homeComps/RecommendView.vue'
 import FeatureView from './homeComps/FeatureView.vue'
 
-import { getHomeMultidata, getHomeGoods } from 'network/home'
-import {debounce} from 'common/utils'
+import { getHomeMultidata, getHomeGoods } from '@/network/home'
+import {debounce} from '@/common/utils'
 
 export default {
   name: "Home",
