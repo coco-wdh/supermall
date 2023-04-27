@@ -1,5 +1,5 @@
 module.exports = {
-  transpileDependencies: true,//自带的
+  transpileDependencies: true,
   configureWebpack: {
     resolve: {
       alias: {

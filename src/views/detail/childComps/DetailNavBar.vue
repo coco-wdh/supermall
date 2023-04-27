@@ -1,0 +1,50 @@
+<template>
+  <nav-bar>
+    <div slot="left" class="back" @click="goBack">
+      <img src="~assets/img/common/back.svg" alt="">
+    </div>
+    <div slot="center" class="title">
+      <div v-for="(item,index) in titles" :class="{active:currentIndex==index}" @click="itemClick(index)">{{ item }}</div>
+    </div>
+  </nav-bar>
+</template>
+
+<script>
+import NavBar from 'components/common/navbar/NavBar'
+
+export default {
+  name: "DetailNavBar",
+  components: {
+    NavBar
+  },
+  data(){
+    return {
+      titles: ['商品', '参数', '评论', '推荐'],
+      currentIndex: 0,
+    }
+  },
+  methods:{
+    goBack(){
+      // history.go(-1);
+      this.$router.back()
+    },
+    itemClick(index){
+      this.currentIndex=index;
+    }
+  }
+}
+</script>
+
+<style scoped>
+.back img{
+  margin-top: 11px;
+}
+.title{
+  display: flex;
+  justify-content: center;
+  gap: 10%;
+}
+.active{
+  color: var(--color-high-text);
+}
+</style>
