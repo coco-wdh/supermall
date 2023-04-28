@@ -1,6 +1,6 @@
 <template>
   <div class="goods-item" @click="itemClick">
-    <img :src="goodsItem.show.img" alt="" @load="imgLoad">
+    <img :src="imageSrc" alt="" @load="imgLoad">
     <div class="goods-info">
       <p>{{ goodsItem.title }}</p>
       <span class="price">{{ goodsItem.price | showPrice }}</span>
@@ -23,6 +23,11 @@ export default {
   filters: {
     showPrice(price) {
       return '￥' + (+price).toFixed(2);
+    }
+  },
+  computed: {
+    imageSrc(){
+      return this.goodsItem.image || this.goodsItem.show.img
     }
   },
   methods:{

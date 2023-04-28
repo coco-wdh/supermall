@@ -10,7 +10,7 @@
       <recommend-view :recommends="recommends"></recommend-view>
       <feature-view></feature-view>
       <tab-control ref="tabControl" :titles="['流行', '新款', '精选']" @tabClick="tabClick"></tab-control>
-      <good-list :goods="goodsList"></good-list>
+      <good-list :goodsList="goodsList"></good-list>
     </scroll>
     <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
   </div>
@@ -65,7 +65,7 @@ export default {
     this.getHomeGoods('sell');
   },
   mounted() {
-    const refresh = debounce(this.$refs.scroll.refresh, 50)
+    const refresh = debounce(this.$refs.scroll.refresh, 50);
     this.$bus.$on('itemImageLoad', () => {
       refresh()
     })
