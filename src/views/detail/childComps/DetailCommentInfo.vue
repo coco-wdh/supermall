@@ -14,7 +14,7 @@
       <div class="info-detail">
         <p>{{ commentInfo.content }}</p>
         <div class="info-other">
-          <span class="date">{{commentInfo.created | showDate}}</span>
+          <span class="date">{{ commentInfo.created | showDate }}</span>
           <span>{{ commentInfo.style }}</span>
         </div>
         <div class="info-imgs">
@@ -38,7 +38,7 @@ export default {
   },
   filters: {
     showDate(value) {
-      return new Intl.DateTimeFormat('en-CA').format(value*1000);
+      return new Intl.DateTimeFormat('en-CA').format(value * 1000);
       // 时间戳只有10位~_~
     }
   }

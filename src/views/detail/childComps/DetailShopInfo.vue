@@ -149,4 +149,5 @@ export default {
   width: 150px;
   line-height: 30px;
   border-radius: 10px;
-}</style>
+}
+</style>

@@ -20,7 +20,7 @@ export default {
   props: {
     detailInfo: {
       type: Object,
-      default(){
+      default() {
         return {}
       }
     }
@@ -47,7 +47,6 @@ export default {
   }
 }
 </script>
-
 <style scoped>
 .details-info {
   padding: 20px 0;
@@ -66,6 +65,7 @@ export default {
   background-color: #a3a3a5;
   position: relative;
 }
+
 .info-desc .start {
   float: left;
 }
@@ -73,6 +73,7 @@ export default {
 .info-desc .end {
   float: right;
 }
+
 .info-desc .start::before,
 .info-desc .end::after {
   content: '';
@@ -85,7 +86,7 @@ export default {
 
 .info-desc .end::after {
   right: 0;
-} 
+}
 
 .info-desc .desc {
   padding: 15px 0;

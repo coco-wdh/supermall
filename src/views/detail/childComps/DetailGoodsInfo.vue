@@ -1,6 +1,6 @@
 <template>
   <div v-if="Object.keys(goods).length !== 0" class="goods-info">
-  <!-- v-if解决数组报错 -->
+    <!-- v-if解决数组报错 -->
     <div class="info-title">{{ goods.title }}</div>
     <div class="info-price">
       <span class="n-price">{{ goods.newPrice }}</span>
@@ -101,5 +101,5 @@ export default {
 .info-service-item span {
   font-size: 13px;
   color: #333;
-} 
+}
 </style>

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { getDetail, Goods, Shop, getRecommend} from '@/network/detail'
+import { getDetail, Goods, Shop, getRecommend } from '@/network/detail'
 import Scroll from '@/components/common/scroll/Scroll.vue'
 
 import DetailNavBar from './childComps/DetailNavBar.vue'
@@ -59,12 +59,12 @@ export default {
       //店铺
       this.shop = new Shop(data.shopInfo);
       //评论
-      this.commentInfo = data.rate.list[0]; 
+      this.commentInfo = data.rate.list[0];
       //详情图片
-      this.detailInfo = data.detailInfo      
+      this.detailInfo = data.detailInfo
     });
     //推荐
-    getRecommend().then(res=>{
+    getRecommend().then(res => {
       this.recommendList = res.data.list;
     })
   },

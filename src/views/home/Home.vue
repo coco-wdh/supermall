@@ -3,7 +3,8 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-    <tab-control ref="tabControlTop" :titles="['流行', '新款', '精选']" @tabClick="tabClick" v-show="isTabFixed" class="tab-control"></tab-control>
+    <tab-control ref="tabControlTop" :titles="['流行', '新款', '精选']" @tabClick="tabClick" v-show="isTabFixed"
+      class="tab-control"></tab-control>
     <scroll class="content" ref="scroll" :probe-type="3" :pull-up-load="true" @scroll="contentScroll"
       @pullingUp="loadMore">
       <home-swiper :banners="banners" @swiperImageLoad="swiperImageLoad"></home-swiper>
@@ -13,6 +14,7 @@
       <good-list :goodsList="goodsList"></good-list>
     </scroll>
     <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
+    <!-- .native监听组件根元素的原生事件 -->
   </div>
 </template>
 
@@ -29,7 +31,7 @@ import RecommendView from './homeComps/RecommendView.vue'
 import FeatureView from './homeComps/FeatureView.vue'
 
 import { getHomeMultidata, getHomeGoods } from '@/network/home'
-import {debounce} from '@/common/utils'
+import { debounce } from '@/common/utils'
 
 export default {
   name: "Home",
@@ -90,8 +92,8 @@ export default {
           break;
       };
       // 两个tab-control同步
-      this.$refs.tabControl.currentIndex=index;
-      this.$refs.tabControlTop.currentIndex=index;
+      this.$refs.tabControl.currentIndex = index;
+      this.$refs.tabControlTop.currentIndex = index;
     },
     //回到顶部
     backClick() {
@@ -120,7 +122,7 @@ export default {
     getHomeGoods(type) {
       const page = this.goods[type].page + 1;
       getHomeGoods(type, page).then(res => {
-        if(res!=undefined){
+        if (res != undefined) {
           this.goods[type].list.push(...res.data.list);
         }
         this.goods[type].page += 1;
@@ -141,27 +143,21 @@ export default {
 .home-nav {
   background-color: var(--color-tint);
   color: #fff;
-
-  /* position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 9;  */
 }
 
 .content {
   overflow: hidden;
   /* 原生滚动失效 */
-
   position: absolute;
   top: 44px;
   left: 0;
   right: 0;
   bottom: 49px;
 }
+
 .tab-control {
   position: relative;
   z-index: 9;
-  margin-top: -1px;/* 和导航栏中间有条缝？ */
-}
-</style>
+  margin-top: -1px;
+  /* 和导航栏中间有条缝？ */
+}</style>

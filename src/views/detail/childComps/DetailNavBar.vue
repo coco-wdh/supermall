@@ -4,7 +4,7 @@
       <img src="~assets/img/common/back.svg" alt="">
     </div>
     <div slot="center" class="title">
-      <div v-for="(item,index) in titles" :class="{active:currentIndex==index}" @click="itemClick(index)">{{ item }}</div>
+      <div v-for="(item, index) in titles" :class="{ active: currentIndex == index }" @click="itemClick(index)">{{ item }}</div>
     </div>
   </nav-bar>
 </template>
@@ -17,33 +17,35 @@ export default {
   components: {
     NavBar
   },
-  data(){
+  data() {
     return {
       titles: ['商品', '评论', '详情', '推荐'],
       currentIndex: 0,
     }
   },
-  methods:{
-    goBack(){
+  methods: {
+    goBack() {
       // history.go(-1);
       this.$router.back()
     },
-    itemClick(index){
-      this.currentIndex=index;
+    itemClick(index) {
+      this.currentIndex = index;
     }
   }
 }
 </script>
 
 <style scoped>
-.back img{
+.back img {
   margin-top: 11px;
 }
-.title{
+
+.title {
   display: flex;
   justify-content: space-around;
 }
-.active{
+
+.active {
   color: var(--color-high-text);
 }
 </style>
