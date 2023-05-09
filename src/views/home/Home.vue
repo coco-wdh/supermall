@@ -31,7 +31,7 @@ import RecommendView from './homeComps/RecommendView.vue'
 import FeatureView from './homeComps/FeatureView.vue'
 
 import { getHomeMultidata, getHomeGoods } from '@/network/home'
-import { debounce } from '@/common/utils'
+import {itemListenerMixin} from '@/common/mixin'
 
 export default {
   name: "Home",
@@ -60,17 +60,15 @@ export default {
       isTabFixed: false
     }
   },
+  mixins:[itemListenerMixin],
   created() {
     this.getHomeMultidata();
     this.getHomeGoods('pop');
     this.getHomeGoods('new');
     this.getHomeGoods('sell');
   },
-  mounted() {
-    const refresh = debounce(this.$refs.scroll.refresh, 50);
-    this.$bus.$on('itemImageLoad', () => {
-      refresh()
-    })
+  deactivated(){
+    this.$bus.$off('itemImageLoad', this.itemImageListener)
   },
   computed: {
     goodsList() {

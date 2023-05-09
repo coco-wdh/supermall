@@ -24,6 +24,7 @@ import DetailDetailsInfo from './childComps/DetailDetailsInfo.vue'
 import DetailCommentInfo from './childComps/DetailCommentInfo.vue'
 
 import GoodsList from '@/components/content/goods/GoodsList.vue'
+import {itemListenerMixin} from '@/common/mixin'
 
 export default {
   name: "Detail",
@@ -48,6 +49,7 @@ export default {
       recommendList: []
     }
   },
+  mixins:[itemListenerMixin],
   created() {
     this.id = this.$route.params.id;
     getDetail(this.id).then(res => {
@@ -67,6 +69,9 @@ export default {
     getRecommend().then(res => {
       this.recommendList = res.data.list;
     })
+  },
+  destroyed(){
+    this.$bus.$off('itemImageLoad', this.itemImageListener)
   },
   methods: {
     imageLoad() {
