@@ -1,13 +1,13 @@
 <template>
   <div id="detail">
-    <detail-nav-bar class="detail-nav"></detail-nav-bar>
-    <scroll class="content" ref="scroll">
+    <detail-nav-bar class="detail-nav" @titleClick="titleClick" :current-index="currentIndex"></detail-nav-bar>
+    <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
       <detail-swiper :images="topImages"></detail-swiper>
       <detail-goods-info :goods="goods" />
       <detail-shop-info :shop="shop" />
-      <detail-comment-info :comment-info="commentInfo"></detail-comment-info>
-      <detail-details-info :detail-info="detailInfo" @imageLoad="imageLoad" />
-      <goods-list :goodsList="recommendList"></goods-list>
+      <detail-comment-info :comment-info="commentInfo" ref="comment"></detail-comment-info>
+      <detail-details-info :detail-info="detailInfo" ref="detailInfo" @imageLoad="imageLoad" />
+      <goods-list :goodsList="recommendList" ref="recommend"></goods-list>
     </scroll>
   </div>
 </template>
@@ -24,7 +24,7 @@ import DetailDetailsInfo from './childComps/DetailDetailsInfo.vue'
 import DetailCommentInfo from './childComps/DetailCommentInfo.vue'
 
 import GoodsList from '@/components/content/goods/GoodsList.vue'
-import {itemListenerMixin} from '@/common/mixin'
+import { itemListenerMixin } from '@/common/mixin'
 
 export default {
   name: "Detail",
@@ -46,10 +46,12 @@ export default {
       shop: {},
       commentInfo: {},
       detailInfo: {},
-      recommendList: []
+      recommendList: [],
+      titleTopYs: [],
+      currentIndex: 0
     }
   },
-  mixins:[itemListenerMixin],
+  mixins: [itemListenerMixin],
   created() {
     this.id = this.$route.params.id;
     getDetail(this.id).then(res => {
@@ -70,12 +72,33 @@ export default {
       this.recommendList = res.data.list;
     })
   },
-  destroyed(){
+  destroyed() {
     this.$bus.$off('itemImageLoad', this.itemImageListener)
   },
   methods: {
     imageLoad() {
-      this.$refs.scroll.refresh()
+      this.$refs.scroll.refresh();
+      //获取offsetTop
+      this.titleTopYs.push(0);
+      this.titleTopYs.push(this.$refs.comment.$el.offsetTop);
+      this.titleTopYs.push(this.$refs.detailInfo.$el.offsetTop);
+      this.titleTopYs.push(this.$refs.recommend.$el.offsetTop);
+      this.titleTopYs.push(Number.MAX_VALUE);
+    },
+    titleClick(index) {
+      this.currentIndex = index;
+      this.$refs.scroll.scrollTo(0, -this.titleTopYs[index] + 44, 500);
+    },
+    contentScroll(position) {
+      let posY = -position.y + 44;
+      for (let i = 0; i < this.titleTopYs.length - 1; i++) {
+        if (posY >= this.titleTopYs[i] && posY < this.titleTopYs[i + 1]) {
+          if (this.currentIndex !== i) {
+            this.currentIndex = i;
+          }
+          break;
+        }
+      }
     }
   }
 }
