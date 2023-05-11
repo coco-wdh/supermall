@@ -9,6 +9,7 @@
       <detail-details-info :detail-info="detailInfo" ref="detailInfo" @imageLoad="imageLoad" />
       <goods-list :goodsList="recommendList" ref="recommend"></goods-list>
     </scroll>
+    <detail-bottom-bar></detail-bottom-bar>
   </div>
 </template>
 
@@ -22,6 +23,7 @@ import DetailGoodsInfo from './childComps/DetailGoodsInfo.vue'
 import DetailShopInfo from './childComps/DetailShopInfo.vue'
 import DetailDetailsInfo from './childComps/DetailDetailsInfo.vue'
 import DetailCommentInfo from './childComps/DetailCommentInfo.vue'
+import DetailBottomBar from './childComps/DetailBottombar.vue'
 
 import GoodsList from '@/components/content/goods/GoodsList.vue'
 import { itemListenerMixin } from '@/common/mixin'
@@ -36,7 +38,8 @@ export default {
     DetailShopInfo,
     DetailCommentInfo,
     DetailDetailsInfo,
-    GoodsList
+    GoodsList,
+    DetailBottomBar
   },
   data() {
     return {
@@ -120,6 +123,6 @@ export default {
 
 .content {
   overflow: hidden;
-  height: calc(100% - 44px);
+  height: calc(100% - 44px - 49px);
 }
 </style>
