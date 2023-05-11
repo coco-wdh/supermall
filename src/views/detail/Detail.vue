@@ -10,7 +10,7 @@
       <goods-list :goodsList="recommendList" ref="recommend"></goods-list>
     </scroll>
     <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
-    <detail-bottom-bar></detail-bottom-bar>
+    <detail-bottom-bar @addCart="addCart"></detail-bottom-bar>
   </div>
 </template>
 
@@ -67,7 +67,7 @@ export default {
       //店铺
       this.shop = new Shop(data.shopInfo);
       //评论
-      this.commentInfo = data.rate.list[0];
+      this.commentInfo = data.rate.cRate==0?{}:data.rate.list[0];
       //详情图片
       this.detailInfo = data.detailInfo
     });
@@ -104,6 +104,15 @@ export default {
           break;
         }
       }
+    },
+    addCart() {
+      const product = {};
+      product.id = this.id;
+      product.imgURL = this.topImages[0];
+      product.title = this.goods.title;
+      product.desc = this.goods.desc;
+      product.price = this.goods.realPrice;
+      this.$store.dispatch('addCart',product);
     }
   }
 }
