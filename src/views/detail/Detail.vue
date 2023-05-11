@@ -9,6 +9,7 @@
       <detail-details-info :detail-info="detailInfo" ref="detailInfo" @imageLoad="imageLoad" />
       <goods-list :goodsList="recommendList" ref="recommend"></goods-list>
     </scroll>
+    <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
     <detail-bottom-bar></detail-bottom-bar>
   </div>
 </template>
@@ -26,7 +27,7 @@ import DetailCommentInfo from './childComps/DetailCommentInfo.vue'
 import DetailBottomBar from './childComps/DetailBottombar.vue'
 
 import GoodsList from '@/components/content/goods/GoodsList.vue'
-import { itemListenerMixin } from '@/common/mixin'
+import { itemListenerMixin, backTopMixin } from '@/common/mixin'
 
 export default {
   name: "Detail",
@@ -54,7 +55,7 @@ export default {
       currentIndex: 0
     }
   },
-  mixins: [itemListenerMixin],
+  mixins: [itemListenerMixin, backTopMixin],
   created() {
     this.id = this.$route.params.id;
     getDetail(this.id).then(res => {
@@ -93,6 +94,7 @@ export default {
       this.$refs.scroll.scrollTo(0, -this.titleTopYs[index] + 44, 500);
     },
     contentScroll(position) {
+      this.isShowBackTop = (-position.y) > 1000;
       let posY = -position.y + 44;
       for (let i = 0; i < this.titleTopYs.length - 1; i++) {
         if (posY >= this.titleTopYs[i] && posY < this.titleTopYs[i + 1]) {

@@ -24,14 +24,13 @@ import NavBar from '@/components/common/navbar/NavBar.vue'
 import TabControl from '@/components/content/tabControl/TabControl.vue'
 import GoodList from '@/components/content/goods/GoodsList.vue'
 import Scroll from '@/components/common/scroll/Scroll.vue'
-import BackTop from '@/components/content/backTop/BackTop.vue'
 
 import HomeSwiper from './homeComps/HomeSwiper.vue'
 import RecommendView from './homeComps/RecommendView.vue'
 import FeatureView from './homeComps/FeatureView.vue'
 
 import { getHomeMultidata, getHomeGoods } from '@/network/home'
-import {itemListenerMixin} from '@/common/mixin'
+import { itemListenerMixin, backTopMixin } from '@/common/mixin'
 
 export default {
   name: "Home",
@@ -42,8 +41,7 @@ export default {
     Scroll,
     HomeSwiper,
     RecommendView,
-    FeatureView,
-    BackTop
+    FeatureView
   },
   data() {
     return {
@@ -55,19 +53,18 @@ export default {
         sell: { page: 0, list: [] }
       },
       currentType: 'pop',
-      isShowBackTop: false,
       tabOffsetTop: 0,
       isTabFixed: false
     }
   },
-  mixins:[itemListenerMixin],
+  mixins: [itemListenerMixin, backTopMixin],
   created() {
     this.getHomeMultidata();
     this.getHomeGoods('pop');
     this.getHomeGoods('new');
     this.getHomeGoods('sell');
   },
-  deactivated(){
+  deactivated() {
     this.$bus.$off('itemImageLoad', this.itemImageListener)
   },
   computed: {
@@ -92,10 +89,6 @@ export default {
       // 两个tab-control同步
       this.$refs.tabControl.currentIndex = index;
       this.$refs.tabControlTop.currentIndex = index;
-    },
-    //回到顶部
-    backClick() {
-      this.$refs.scroll.scrollTo(0, 0);
     },
     contentScroll(position) {
       //回到顶部按钮显示
@@ -158,4 +151,5 @@ export default {
   z-index: 9;
   margin-top: -1px;
   /* 和导航栏中间有条缝？ */
-}</style>
+}
+</style>
