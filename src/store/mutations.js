@@ -5,5 +5,8 @@ export default {
   },
   [types.ADD_COUNT](state,payload){
     payload.count++
+  },
+  [types.CHANGE_CHECKED](state,payload){
+    payload.checked = !payload.checked
   }
 }
