@@ -8,5 +8,9 @@ export default {
   },
   [types.CHANGE_CHECKED](state,payload){
     payload.checked = !payload.checked
+  },
+  [types.CHECKED_ALL](state,payload){
+    console.log(state)
+    state.cartList.forEach(item => item.checked = payload)
   }
 }
