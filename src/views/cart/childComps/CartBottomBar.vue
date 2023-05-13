@@ -1,9 +1,9 @@
 <template>
   <div class="cart-bottom">
-    <check-button class="select-all" :checked="!isSelectAll" @click.native="selectAll"></check-button>
+    <check-button class="select-all" :checked="!isSelectAll" @checkBtnClick="selectAll"></check-button>
     <span>全选</span>
     <span class="total-price">合计:￥{{totalPrice}}</span>
-    <span class="settlement">结算({{cartListLength}})</span>
+    <span class="settlement">结算</span>
   </div>
 </template>
 

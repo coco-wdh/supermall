@@ -1,5 +1,5 @@
 <template>
-    <div class="icon-selector" :class="{'selector-active': checked}">
+    <div class="icon-selector" :class="{'selector-active': checked}" @click="checkBtnClick">
       <img src="~/assets/img/cart/tick.svg" alt="">
     </div>
 </template>
@@ -11,6 +11,11 @@ export default {
     checked: {
       type: Boolean,
       default: false
+    }
+  },
+  methods: {
+    checkBtnClick(){
+      this.$emit('checkBtnClick')
     }
   }
 }
