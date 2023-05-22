@@ -17,6 +17,7 @@
 <script>
 import { getDetail, Goods, Shop, getRecommend } from '@/network/detail'
 import Scroll from '@/components/common/scroll/Scroll.vue'
+import GoodsList from '@/components/content/goods/GoodsList.vue'
 
 import DetailNavBar from './childComps/DetailNavBar.vue'
 import DetailSwiper from './childComps/DetailSwiper.vue'
@@ -26,8 +27,8 @@ import DetailDetailsInfo from './childComps/DetailDetailsInfo.vue'
 import DetailCommentInfo from './childComps/DetailCommentInfo.vue'
 import DetailBottomBar from './childComps/DetailBottombar.vue'
 
-import GoodsList from '@/components/content/goods/GoodsList.vue'
 import { itemListenerMixin, backTopMixin } from '@/common/mixin'
+import { mapActions } from 'vuex'
 
 export default {
   name: "Detail",
@@ -40,7 +41,7 @@ export default {
     DetailCommentInfo,
     DetailDetailsInfo,
     GoodsList,
-    DetailBottomBar
+    DetailBottomBar,
   },
   data() {
     return {
@@ -80,6 +81,9 @@ export default {
     this.$bus.$off('itemImageLoad', this.itemImageListener)
   },
   methods: {
+    ...mapActions({
+      add: 'addCart'
+    }),
     imageLoad() {
       this.$refs.scroll.refresh();
       //获取offsetTop
@@ -112,7 +116,9 @@ export default {
       product.title = this.goods.title;
       product.desc = this.goods.desc;
       product.price = this.goods.realPrice;
-      this.$store.dispatch('addCart',product);
+      this.add(product).then(res=>{
+        this.$toast.show(res);
+      });
     }
   }
 }
