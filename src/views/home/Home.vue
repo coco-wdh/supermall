@@ -86,6 +86,10 @@ export default {
           this.currentType = 'sell';
           break;
       };
+      //切换标签时回到顶部
+      if(index!==this.$refs.tabControl.currentIndex){
+        this.$refs.scroll.scrollTo(0,-this.tabOffsetTop);
+      }
       // 两个tab-control同步
       this.$refs.tabControl.currentIndex = index;
       this.$refs.tabControlTop.currentIndex = index;
